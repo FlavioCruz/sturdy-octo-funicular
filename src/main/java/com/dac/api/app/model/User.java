@@ -5,16 +5,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name = "users")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@NoArgsConstructor
 public class User {
+
+    public User(final String username, final String password, final List<UserRole> role, final String email) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,9 +41,10 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.USER;
+    private List<UserRole> role = Collections.singletonList(UserRole.USER);
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Null
     @JoinTable(name = "user_activities", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "activity_id"))
     private List<Activity> favoritedActivities;
 }

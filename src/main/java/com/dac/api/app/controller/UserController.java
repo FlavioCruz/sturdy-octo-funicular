@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,6 +60,7 @@ public class UserController {
 
     @PostMapping("/")
     @Operation(description = "Endpoint para criação de usuários.")
+    @Secured("ADMIN")
     public ResponseEntity<ApiResponseDTO> create(@Valid @RequestBody final UserSaveDTO entity) {
         try {
             final User user = this.userService.save(entity);

@@ -11,13 +11,13 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "editi0ns")
+@Table(name = "editions")
 public class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private int year;
+    private int yearEdition;
     @NotNull
     private int editionNumber;
 

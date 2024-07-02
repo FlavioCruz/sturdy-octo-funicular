@@ -1,14 +1,13 @@
 package com.dac.api.app.dto;
 
+import com.dac.api.app.enums.ActivityType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.sql.Time;
-import java.time.LocalDate;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.dac.api.app.enums.ActivityType;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -18,11 +17,10 @@ public class ActivityResponseDTO {
     private ActivityType type;
     private String name;
     private String description;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
-
     @DateTimeFormat(pattern = "HH:mm:ss")
-    private Time startTime;
-
+    private LocalTime startTime;
     @DateTimeFormat(pattern = "HH:mm:ss")
-    private Time endTime;
+    private LocalTime endTime;
 }

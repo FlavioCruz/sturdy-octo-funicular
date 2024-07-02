@@ -1,17 +1,16 @@
 package com.dac.api.app.dto;
 
-import java.sql.Time;
-import java.time.LocalDate;
-
 import com.dac.api.app.enums.ActivityType;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -34,11 +33,11 @@ public class ActivitySaveDTO {
 
     @NotNull
     @JsonFormat(pattern = "HH:mm:ss")
-    private Time startTime;
+    private LocalTime startTime;
 
     @NotNull
     @JsonFormat(pattern = "HH:mm:ss")
-    private Time endTime;
+    private LocalTime endTime;
 
     @NotNull
     private Long edition_id;

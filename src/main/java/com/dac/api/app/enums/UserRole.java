@@ -1,16 +1,20 @@
 package com.dac.api.app.enums;
 
-public enum UserRole {
-    ADMIN("admin"),
-    USER("user");
+import org.springframework.security.core.GrantedAuthority;
 
-    private String role;
+public enum UserRole implements GrantedAuthority {
+    ADMIN("ADMIN"),
+    USER("USER"),
+    ORGANIZER("ORGANIZER");
 
-    UserRole(String role) {
+    private final String role;
+
+    UserRole(final String role) {
         this.role = role;
     }
 
-    public String getRole() {
-        return role;
+    @Override
+    public String getAuthority() {
+        return "ROLE_" + name();
     }
 }
